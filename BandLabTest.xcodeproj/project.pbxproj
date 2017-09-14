@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		7EFEEA521F6A835D00A5ACFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */; };
-		7EFEEA541F6A835D00A5ACFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA531F6A835D00A5ACFD /* ViewController.swift */; };
-		7EFEEA571F6A835D00A5ACFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFEEA551F6A835D00A5ACFD /* Main.storyboard */; };
+		7EFEEA541F6A835D00A5ACFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */; };
 		7EFEEA591F6A835D00A5ACFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EFEEA581F6A835D00A5ACFD /* Assets.xcassets */; };
 		7EFEEA5C1F6A835D00A5ACFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFEEA5A1F6A835D00A5ACFD /* LaunchScreen.storyboard */; };
 		7EFEEA671F6A835D00A5ACFD /* BandLabTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA661F6A835D00A5ACFD /* BandLabTestTests.swift */; };
+		7EFEEA721F6A856D00A5ACFD /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA711F6A856D00A5ACFD /* Router.swift */; };
+		7EFEEA741F6A879900A5ACFD /* MainViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA731F6A879900A5ACFD /* MainViewService.swift */; };
+		7EFEEA761F6A89FD00A5ACFD /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA751F6A89FD00A5ACFD /* Song.swift */; };
+		7EFEEA781F6A8C0600A5ACFD /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA771F6A8C0600A5ACFD /* Author.swift */; };
+		7EFEEA7E1F6ADEA700A5ACFD /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */; };
+		7EFEEA801F6AEF2700A5ACFD /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA7F1F6AEF2700A5ACFD /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +33,19 @@
 /* Begin PBXFileReference section */
 		7EFEEA4E1F6A835D00A5ACFD /* BandLabTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BandLabTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7EFEEA531F6A835D00A5ACFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7EFEEA561F6A835D00A5ACFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7EFEEA581F6A835D00A5ACFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EFEEA5B1F6A835D00A5ACFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EFEEA5D1F6A835D00A5ACFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EFEEA621F6A835D00A5ACFD /* BandLabTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BandLabTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFEEA661F6A835D00A5ACFD /* BandLabTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandLabTestTests.swift; sourceTree = "<group>"; };
 		7EFEEA681F6A835D00A5ACFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EFEEA711F6A856D00A5ACFD /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		7EFEEA731F6A879900A5ACFD /* MainViewService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewService.swift; sourceTree = "<group>"; };
+		7EFEEA751F6A89FD00A5ACFD /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		7EFEEA771F6A8C0600A5ACFD /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		7EFEEA7F1F6AEF2700A5ACFD /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +88,16 @@
 			isa = PBXGroup;
 			children = (
 				7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */,
-				7EFEEA531F6A835D00A5ACFD /* ViewController.swift */,
-				7EFEEA551F6A835D00A5ACFD /* Main.storyboard */,
 				7EFEEA581F6A835D00A5ACFD /* Assets.xcassets */,
-				7EFEEA5A1F6A835D00A5ACFD /* LaunchScreen.storyboard */,
+				7EFEEA771F6A8C0600A5ACFD /* Author.swift */,
 				7EFEEA5D1F6A835D00A5ACFD /* Info.plist */,
+				7EFEEA5A1F6A835D00A5ACFD /* LaunchScreen.storyboard */,
+				7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */,
+				7EFEEA731F6A879900A5ACFD /* MainViewService.swift */,
+				7EFEEA711F6A856D00A5ACFD /* Router.swift */,
+				7EFEEA751F6A89FD00A5ACFD /* Song.swift */,
+				7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */,
+				7EFEEA7F1F6AEF2700A5ACFD /* PlayerView.swift */,
 			);
 			path = BandLabTest;
 			sourceTree = "<group>";
@@ -183,7 +198,6 @@
 			files = (
 				7EFEEA5C1F6A835D00A5ACFD /* LaunchScreen.storyboard in Resources */,
 				7EFEEA591F6A835D00A5ACFD /* Assets.xcassets in Resources */,
-				7EFEEA571F6A835D00A5ACFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,8 +215,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFEEA541F6A835D00A5ACFD /* ViewController.swift in Sources */,
+				7EFEEA781F6A8C0600A5ACFD /* Author.swift in Sources */,
+				7EFEEA541F6A835D00A5ACFD /* MainViewController.swift in Sources */,
+				7EFEEA7E1F6ADEA700A5ACFD /* SoundPlayer.swift in Sources */,
+				7EFEEA801F6AEF2700A5ACFD /* PlayerView.swift in Sources */,
+				7EFEEA741F6A879900A5ACFD /* MainViewService.swift in Sources */,
+				7EFEEA721F6A856D00A5ACFD /* Router.swift in Sources */,
 				7EFEEA521F6A835D00A5ACFD /* AppDelegate.swift in Sources */,
+				7EFEEA761F6A89FD00A5ACFD /* Song.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,14 +245,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7EFEEA551F6A835D00A5ACFD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7EFEEA561F6A835D00A5ACFD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7EFEEA5A1F6A835D00A5ACFD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -285,7 +297,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -329,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -412,6 +424,7 @@
 				7EFEEA6D1F6A835D00A5ACFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7EFEEA6E1F6A835D00A5ACFD /* Build configuration list for PBXNativeTarget "BandLabTestTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +433,7 @@
 				7EFEEA701F6A835D00A5ACFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
