@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E2767BD1F6E774D00A22B5E /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2767BC1F6E774D00A22B5E /* Domain.swift */; };
+		7E2767BF1F6E7EB300A22B5E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2767BE1F6E7EB300A22B5E /* MainViewModel.swift */; };
 		7EFEEA521F6A835D00A5ACFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */; };
 		7EFEEA541F6A835D00A5ACFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */; };
 		7EFEEA591F6A835D00A5ACFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EFEEA581F6A835D00A5ACFD /* Assets.xcassets */; };
@@ -14,8 +16,6 @@
 		7EFEEA671F6A835D00A5ACFD /* BandLabTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA661F6A835D00A5ACFD /* BandLabTestTests.swift */; };
 		7EFEEA721F6A856D00A5ACFD /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA711F6A856D00A5ACFD /* Router.swift */; };
 		7EFEEA741F6A879900A5ACFD /* MainViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA731F6A879900A5ACFD /* MainViewService.swift */; };
-		7EFEEA761F6A89FD00A5ACFD /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA751F6A89FD00A5ACFD /* Song.swift */; };
-		7EFEEA781F6A8C0600A5ACFD /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA771F6A8C0600A5ACFD /* Author.swift */; };
 		7EFEEA7E1F6ADEA700A5ACFD /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */; };
 		7EFEEA801F6AEF2700A5ACFD /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA7F1F6AEF2700A5ACFD /* PlayerView.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E2767BC1F6E774D00A22B5E /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
+		7E2767BE1F6E7EB300A22B5E /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7EFEEA4E1F6A835D00A5ACFD /* BandLabTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BandLabTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -42,8 +44,6 @@
 		7EFEEA681F6A835D00A5ACFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EFEEA711F6A856D00A5ACFD /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7EFEEA731F6A879900A5ACFD /* MainViewService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewService.swift; sourceTree = "<group>"; };
-		7EFEEA751F6A89FD00A5ACFD /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
-		7EFEEA771F6A8C0600A5ACFD /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		7EFEEA7F1F6AEF2700A5ACFD /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,15 +89,15 @@
 			children = (
 				7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */,
 				7EFEEA581F6A835D00A5ACFD /* Assets.xcassets */,
-				7EFEEA771F6A8C0600A5ACFD /* Author.swift */,
+				7E2767BC1F6E774D00A22B5E /* Domain.swift */,
 				7EFEEA5D1F6A835D00A5ACFD /* Info.plist */,
 				7EFEEA5A1F6A835D00A5ACFD /* LaunchScreen.storyboard */,
 				7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */,
+				7E2767BE1F6E7EB300A22B5E /* MainViewModel.swift */,
 				7EFEEA731F6A879900A5ACFD /* MainViewService.swift */,
-				7EFEEA711F6A856D00A5ACFD /* Router.swift */,
-				7EFEEA751F6A89FD00A5ACFD /* Song.swift */,
-				7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */,
 				7EFEEA7F1F6AEF2700A5ACFD /* PlayerView.swift */,
+				7EFEEA711F6A856D00A5ACFD /* Router.swift */,
+				7EFEEA7D1F6ADEA700A5ACFD /* SoundPlayer.swift */,
 			);
 			path = BandLabTest;
 			sourceTree = "<group>";
@@ -215,14 +215,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFEEA781F6A8C0600A5ACFD /* Author.swift in Sources */,
 				7EFEEA541F6A835D00A5ACFD /* MainViewController.swift in Sources */,
 				7EFEEA7E1F6ADEA700A5ACFD /* SoundPlayer.swift in Sources */,
 				7EFEEA801F6AEF2700A5ACFD /* PlayerView.swift in Sources */,
 				7EFEEA741F6A879900A5ACFD /* MainViewService.swift in Sources */,
 				7EFEEA721F6A856D00A5ACFD /* Router.swift in Sources */,
 				7EFEEA521F6A835D00A5ACFD /* AppDelegate.swift in Sources */,
-				7EFEEA761F6A89FD00A5ACFD /* Song.swift in Sources */,
+				7E2767BD1F6E774D00A22B5E /* Domain.swift in Sources */,
+				7E2767BF1F6E7EB300A22B5E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

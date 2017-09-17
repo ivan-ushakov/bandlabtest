@@ -1,12 +1,31 @@
 //
-//  Song.swift
+//  Domain.swift
 //  BandLabTest
 //
-//  Created by Ivan Ushakov on 14/09/2017.
+//  Created by Ivan Ushakov on 17/09/2017.
 //  Copyright © 2017 Ivan Ushakov. All rights reserved.
 //
 
 import Foundation
+
+struct Author {
+    
+    var name: String
+    
+    var avatarURL: String
+    
+}
+
+extension Author {
+    static func create(_ object: Dictionary<String, Any>) -> Author? {
+        guard let name = object["name"] as? String else { return nil }
+        
+        guard let picture = object["picture"] as? Dictionary<String, Any>,
+            let avatarURL = picture["xs"] as? String else { return nil }
+        
+        return Author(name: name, avatarURL: avatarURL)
+    }
+}
 
 struct Song {
     
@@ -23,11 +42,11 @@ struct Song {
 
 extension Song {
     
-    static func map(_ object: Dictionary<String, Any>) -> Song? {
+    static func create(_ object: Dictionary<String, Any>) -> Song? {
         guard let id = object["id"] as? String else { return nil }
         
         guard let authorObject = object["author"] as? Dictionary<String, Any>,
-            let author = Author.map(authorObject) else { return nil }
+            let author = Author.create(authorObject) else { return nil }
         
         guard let name = object["name"] as? String else { return nil }
         

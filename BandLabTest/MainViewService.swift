@@ -48,7 +48,7 @@ class MainViewService: MainViewServiceProtocol {
                 return
             }
             
-            completion(array.flatMap({ Song.map($0) }))
+            completion(array.flatMap({ Song.create($0) }))
         }
         task.resume()
     }

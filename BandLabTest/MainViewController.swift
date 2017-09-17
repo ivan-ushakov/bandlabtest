@@ -8,125 +8,6 @@
 
 import UIKit
 
-class SongCellModel {
-    
-    let authorName: String
-    
-    let authorAvatarURL: String
-    
-    let name: String
-    
-    let coverURL: String
-    
-    let audioURL: String
-    
-    let service: MainViewServiceProtocol
-    
-    var playing = false {
-        didSet {
-            self.onPlayingUpdate?()
-        }
-    }
-    
-    var onPlayingUpdate: (() -> ())?
-    
-    private let song: Song
-    
-    private var observer: Any?
-    
-    init(song: Song, service: MainViewServiceProtocol) {
-        self.song = song
-        self.service = service
-        
-        self.authorName = song.author.name
-        self.authorAvatarURL = song.author.avatarURL
-        self.name = song.name
-        self.coverURL = song.coverURL
-        self.audioURL = song.audioURL
-        
-        self.observer = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
-            guard let userInfo = object.userInfo, let state = userInfo["state"] as? SoundPlayerState else { return }
-            if state.song.id == self?.song.id {
-                self?.playing = state.playing
-            }
-        }
-    }
-    
-    deinit {
-        if let observer = self.observer {
-            NotificationCenter.default.removeObserver(observer)
-        }
-    }
-    
-    func loadImage(_ url: String, completion: @escaping (String, Data?) -> ()) {
-        self.service.loadImage(url, completion: completion)
-    }
-    
-    func play() {
-        if self.playing {
-            self.service.stopPlayer()
-        } else {
-            self.service.play(self.song)
-        }
-    }
-}
-
-extension SongCellModel {
-    
-    static func map(song: Song, service: MainViewServiceProtocol) -> SongCellModel {
-        return SongCellModel(song: song, service: service)
-    }
-}
-
-class MainViewModel {
-    
-    var cells = [SongCellModel]() {
-        didSet {
-            self.onCellsUpdate?()
-        }
-    }
-    
-    var onCellsUpdate: (() -> ())?
-    
-    var onPlayerState: ((SoundPlayerState) -> ())?
-    
-    private let service: MainViewServiceProtocol
-    
-    private var observer: Any?
-    
-    init(service: MainViewServiceProtocol) {
-        self.service = service
-        
-        self.observer = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
-            guard let userInfo = object.userInfo, let state = userInfo["state"] as? SoundPlayerState else { return }
-            self?.onPlayerState?(state)
-        }
-    }
-    
-    deinit {
-        if let observer = self.observer {
-            NotificationCenter.default.removeObserver(observer)
-        }
-    }
-    
-    func load() {
-        self.service.fetch { [weak self] result in
-            guard let strong = self else { return }
-            
-            guard let array = result?.map({ SongCellModel.map(song: $0, service: strong.service) }) else {
-                // TODO show error
-                return
-            }
-            
-            DispatchQueue.main.async { strong.cells = array }
-        }
-    }
-    
-    func stopPlayer() {
-        self.service.stopPlayer()
-    }
-}
-
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -163,7 +44,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.cells.count
+        return self.viewModel.cells.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -171,7 +52,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             fatalError()
         }
         
-        cell.bindViewModel(self.viewModel.cells[indexPath.row])
+        cell.bindViewModel(self.viewModel.cells.value[indexPath.row])
         
         return cell
     }
@@ -231,7 +112,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     private func bindViewModel() {
-        self.viewModel.onCellsUpdate = { [weak self] in
+        self.viewModel.cells.onUpdate = { [weak self] _ in
             self?.collectionView.reloadData()
         }
         
@@ -366,11 +247,10 @@ fileprivate class SongCell: UICollectionViewCell {
         self.authorView.nameLabel.text = viewModel.authorName
         self.authorView.timeLabel.text = "23 min ago"
         
-        viewModel.onPlayingUpdate = { [weak self] in
-            self?.onPlaying()
+        viewModel.playing.onUpdate = { [weak self] value in
+            self?.onPlaying(value)
         }
-        
-        onPlaying()
+        viewModel.playing.fire()
         
         viewModel.loadImage(viewModel.coverURL) { [weak self] (url, data) in
             if url != self?.viewModel?.coverURL { return }
@@ -405,8 +285,8 @@ fileprivate class SongCell: UICollectionViewCell {
         self.viewModel?.play()
     }
     
-    private func onPlaying() {
-        if self.viewModel?.playing ?? false {
+    private func onPlaying(_ playing: Bool) {
+        if playing {
             self.playButton.setImage(UIImage(named: "pause_icon"), for: .normal)
         } else {
             self.playButton.setImage(UIImage(named: "play_icon"), for: .normal)
