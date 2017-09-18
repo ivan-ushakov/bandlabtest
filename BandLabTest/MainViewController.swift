@@ -202,7 +202,9 @@ fileprivate class SongCell: UICollectionViewCell {
     
     private let imageView = UIImageView()
     
-    private let label = UILabel()
+    private let titleLabel = UILabel()
+    
+    private let timeLabel = UILabel()
     
     private let authorView = AuthorView()
     
@@ -241,21 +243,33 @@ fileprivate class SongCell: UICollectionViewCell {
         self.playButton.frame = CGRect(x: 136, y: 134, width: buttonSize, height: buttonSize)
         
         let border = CGFloat(15)
-        self.label.frame = CGRect(x: border, y: 239, width: width - 2 * border, height: 25)
+        self.titleLabel.frame = CGRect(x: border, y: 239, width: width - 2 * border, height: 25)
+        
+        let timeLabelWidth = CGFloat(80)
+        self.timeLabel.frame = CGRect(x: width - timeLabelWidth - border, y: 290, width: timeLabelWidth, height: 16)
     }
     
     func bindViewModel(_ viewModel: SongCellModel) {
         self.viewModel = viewModel
         
-        self.label.text = viewModel.name
+        self.titleLabel.text = viewModel.name
         
         self.authorView.nameLabel.text = viewModel.authorName
         self.authorView.timeLabel.text = viewModel.created
         
         viewModel.playing.onUpdate = { [weak self] value in
-            self?.onPlaying(value)
+            if value {
+                self?.playButton.setImage(UIImage(named: "pause_icon"), for: .normal)
+            } else {
+                self?.playButton.setImage(UIImage(named: "play_icon"), for: .normal)
+            }
         }
         viewModel.playing.fire()
+        
+        viewModel.time.onUpdate = { [weak self] value in
+            self?.timeLabel.text = value
+        }
+        viewModel.time.fire()
         
         viewModel.loadImage(viewModel.coverURL) { [weak self] (url, data) in
             if url != self?.viewModel?.coverURL { return }
@@ -285,21 +299,18 @@ fileprivate class SongCell: UICollectionViewCell {
         self.playButton.addTarget(self, action: #selector(play), for: .touchUpInside)
         self.contentView.addSubview(self.playButton)
         
-        self.label.font = UIFont.boldSystemFont(ofSize: 20)
-        self.label.textColor = UIColor.white
-        self.label.textAlignment = .left
-        self.contentView.addSubview(self.label)
+        self.titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        self.titleLabel.textColor = UIColor.white
+        self.titleLabel.textAlignment = .left
+        self.contentView.addSubview(self.titleLabel)
+        
+        self.timeLabel.font = UIFont.systemFont(ofSize: 14)
+        self.timeLabel.textColor = UIColor.white
+        self.timeLabel.textAlignment = .right
+        self.contentView.addSubview(self.timeLabel)
     }
     
     @objc private func play() {
         self.viewModel?.play()
-    }
-    
-    private func onPlaying(_ playing: Bool) {
-        if playing {
-            self.playButton.setImage(UIImage(named: "pause_icon"), for: .normal)
-        } else {
-            self.playButton.setImage(UIImage(named: "play_icon"), for: .normal)
-        }
     }
 }

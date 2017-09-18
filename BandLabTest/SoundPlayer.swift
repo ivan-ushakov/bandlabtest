@@ -14,9 +14,16 @@ struct SoundPlayerState {
     var song: Song
 }
 
+struct SoundPlayerTime {
+    var current: Int
+    var duration: Int
+}
+
 extension NSNotification.Name {
     
     static let SoundPlayerState = Notification.Name("SoundPlayerState")
+    
+    static let SoundPlayerTime = Notification.Name("SoundPlayerTime")
 }
 
 class SoundPlayer: NSObject {
@@ -32,14 +39,27 @@ class SoundPlayer: NSObject {
         
         guard let url = URL(string: song.audioURL) else { return }
         
-        self.player = AVPlayer(playerItem: AVPlayerItem(url: url))
+        let item = AVPlayerItem(url: url)
+        self.player = AVPlayer(playerItem: item)
         self.player?.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
+        
+        self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: nil) { [weak self] time in
+            guard let item = self?.player?.currentItem else { return }
+            
+            if item.status != .readyToPlay {
+                return
+            }
+            
+            let object = SoundPlayerTime(current: Int(time.seconds), duration: Int(item.duration.seconds))
+            NotificationCenter.default.post(name: .SoundPlayerState, object: self, userInfo: ["object": object])
+        }
+        
         self.player?.play()
         
         self.song = song
         
-        let state = SoundPlayerState(playing: true, song: song)
-        NotificationCenter.default.post(name: .SoundPlayerState, object: self, userInfo: ["state": state])
+        let object = SoundPlayerState(playing: true, song: song)
+        NotificationCenter.default.post(name: .SoundPlayerState, object: self, userInfo: ["object": object])
     }
     
     func stop() {
@@ -61,7 +81,7 @@ class SoundPlayer: NSObject {
     private func notifyStop() {
         guard let song = self.song else { return }
         
-        let state = SoundPlayerState(playing: false, song: song)
-        NotificationCenter.default.post(name: .SoundPlayerState, object: self, userInfo: ["state": state])
+        let object = SoundPlayerState(playing: false, song: song)
+        NotificationCenter.default.post(name: .SoundPlayerState, object: self, userInfo: ["object": object])
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E0B75A41F6FB47000618680 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B75A31F6FB47000618680 /* Formatter.swift */; };
 		7E2767BD1F6E774D00A22B5E /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2767BC1F6E774D00A22B5E /* Domain.swift */; };
 		7E2767BF1F6E7EB300A22B5E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2767BE1F6E7EB300A22B5E /* MainViewModel.swift */; };
 		7EFEEA521F6A835D00A5ACFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E0B75A31F6FB47000618680 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		7E2767BC1F6E774D00A22B5E /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		7E2767BE1F6E7EB300A22B5E /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7EFEEA4E1F6A835D00A5ACFD /* BandLabTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BandLabTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 				7EFEEA511F6A835D00A5ACFD /* AppDelegate.swift */,
 				7EFEEA581F6A835D00A5ACFD /* Assets.xcassets */,
 				7E2767BC1F6E774D00A22B5E /* Domain.swift */,
+				7E0B75A31F6FB47000618680 /* Formatter.swift */,
 				7EFEEA5D1F6A835D00A5ACFD /* Info.plist */,
 				7EFEEA5A1F6A835D00A5ACFD /* LaunchScreen.storyboard */,
 				7EFEEA531F6A835D00A5ACFD /* MainViewController.swift */,
@@ -218,6 +221,7 @@
 				7EFEEA541F6A835D00A5ACFD /* MainViewController.swift in Sources */,
 				7EFEEA7E1F6ADEA700A5ACFD /* SoundPlayer.swift in Sources */,
 				7EFEEA801F6AEF2700A5ACFD /* PlayerView.swift in Sources */,
+				7E0B75A41F6FB47000618680 /* Formatter.swift in Sources */,
 				7EFEEA741F6A879900A5ACFD /* MainViewService.swift in Sources */,
 				7EFEEA721F6A856D00A5ACFD /* Router.swift in Sources */,
 				7EFEEA521F6A835D00A5ACFD /* AppDelegate.swift in Sources */,

@@ -41,9 +41,11 @@ class SongCellModel {
     
     var playing = Property<Bool>(value: false, onUpdate: nil)
     
+    var time = Property<String?>(value: nil, onUpdate: nil)
+    
     private let song: Song
     
-    private var observer: Any?
+    private var observers = [Any]()
     
     init(song: Song, service: MainViewServiceProtocol) {
         self.song = song
@@ -55,19 +57,10 @@ class SongCellModel {
         self.coverURL = song.coverURL
         self.audioURL = song.audioURL
         self.created = Formatter.instance.format(song.created)
-        
-        self.observer = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
-            guard let userInfo = object.userInfo, let state = userInfo["state"] as? SoundPlayerState else { return }
-            if state.song.id == self?.song.id {
-                self?.playing.value = state.playing
-            }
-        }
     }
     
     deinit {
-        if let observer = self.observer {
-            NotificationCenter.default.removeObserver(observer)
-        }
+        removeObservers()
     }
     
     func loadImage(_ url: String, completion: @escaping (String, Data?) -> ()) {
@@ -76,9 +69,36 @@ class SongCellModel {
     
     func play() {
         if self.playing.value {
+            self.playing.value = false
+            self.time.value = nil
+            removeObservers()
             self.service.stopPlayer()
         } else {
+            addObservers()
             self.service.play(self.song)
+        }
+    }
+    
+    private func addObservers() {
+        let stateObserver = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
+            guard let userInfo = object.userInfo, let state = userInfo["object"] as? SoundPlayerState else { return }
+            if state.song.id == self?.song.id {
+                self?.playing.value = state.playing
+                self?.time.value = nil
+            }
+        }
+        self.observers.append(stateObserver)
+        
+        let timeObserver = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
+            guard let userInfo = object.userInfo, let time = userInfo["object"] as? SoundPlayerTime else { return }
+            self?.time.value = "\(formatSeconds(time.current)) / \(formatSeconds(time.duration))"
+        }
+        self.observers.append(timeObserver)
+    }
+    
+    private func removeObservers() {
+        self.observers.forEach { observer in
+            NotificationCenter.default.removeObserver(observer)
         }
     }
 }
@@ -104,7 +124,7 @@ class MainViewModel {
         self.service = service
         
         self.observer = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
-            guard let userInfo = object.userInfo, let state = userInfo["state"] as? SoundPlayerState else { return }
+            guard let userInfo = object.userInfo, let state = userInfo["object"] as? SoundPlayerState else { return }
             self?.onPlayerState?(state)
         }
     }
@@ -130,21 +150,5 @@ class MainViewModel {
     
     func stopPlayer() {
         self.service.stopPlayer()
-    }
-}
-
-fileprivate class Formatter {
-    
-    static let instance = Formatter()
-    
-    private let f = DateFormatter()
-    
-    private init() {
-        f.locale = Locale(identifier: "US_en")
-        f.dateFormat = "h:mm dd.MM.yyyy"
-    }
-    
-    func format(_ date: Date) -> String {
-        return f.string(from:date)
     }
 }
