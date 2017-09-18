@@ -38,6 +38,8 @@ struct Song {
     var coverURL: String
     
     var audioURL: String
+    
+    var created: Date
 }
 
 extension Song {
@@ -55,6 +57,30 @@ extension Song {
         
         guard let audioURL = object["audioLink"] as? String else { return nil }
         
-        return Song(id: id, author: author, name: name, coverURL: coverURL, audioURL: audioURL)
+        guard let createdOn = object["createdOn"] as? String,
+            let created = Parser.instance.parse(createdOn) else { return nil }
+        
+        return Song(id: id,
+                    author: author,
+                    name: name,
+                    coverURL: coverURL,
+                    audioURL: audioURL,
+                    created: created)
+    }
+}
+
+fileprivate class Parser {
+    
+    static let instance = Parser()
+    
+    private let formatter = DateFormatter()
+    
+    private init() {
+        formatter.locale = Locale(identifier: "US_en")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    }
+    
+    func parse(_ value: String) -> Date? {
+        return self.formatter.date(from: value)
     }
 }

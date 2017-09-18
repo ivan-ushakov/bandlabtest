@@ -35,6 +35,8 @@ class SongCellModel {
     
     let audioURL: String
     
+    let created: String
+    
     let service: MainViewServiceProtocol
     
     var playing = Property<Bool>(value: false, onUpdate: nil)
@@ -52,6 +54,7 @@ class SongCellModel {
         self.name = song.name
         self.coverURL = song.coverURL
         self.audioURL = song.audioURL
+        self.created = Formatter.instance.format(song.created)
         
         self.observer = NotificationCenter.default.addObserver(forName: .SoundPlayerState, object: nil, queue: nil) { [weak self] object in
             guard let userInfo = object.userInfo, let state = userInfo["state"] as? SoundPlayerState else { return }
@@ -127,5 +130,21 @@ class MainViewModel {
     
     func stopPlayer() {
         self.service.stopPlayer()
+    }
+}
+
+fileprivate class Formatter {
+    
+    static let instance = Formatter()
+    
+    private let f = DateFormatter()
+    
+    private init() {
+        f.locale = Locale(identifier: "US_en")
+        f.dateFormat = "h:mm dd.MM.yyyy"
+    }
+    
+    func format(_ date: Date) -> String {
+        return f.string(from:date)
     }
 }
